@@ -1,0 +1,135 @@
+[
+    {
+        "id": "76cf00d423e72ab7",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f2ab9adeea7de3cf",
+        "type": "mqtt in",
+        "z": "76cf00d423e72ab7",
+        "name": "MQTT Broker",
+        "topic": "test",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "f40b68efcafaea0f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "5073f43e9d7b6970"
+            ]
+        ]
+    },
+    {
+        "id": "5073f43e9d7b6970",
+        "type": "change",
+        "z": "76cf00d423e72ab7",
+        "name": "String to Number",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$number(payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 260,
+        "wires": [
+            [
+                "5290a6d00a9eab83",
+                "a38c126e47074e32"
+            ]
+        ]
+    },
+    {
+        "id": "5290a6d00a9eab83",
+        "type": "debug",
+        "z": "76cf00d423e72ab7",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a38c126e47074e32",
+        "type": "influxdb out",
+        "z": "76cf00d423e72ab7",
+        "influxdb": "1c54d35924890682",
+        "name": "InfluxDB Backet",
+        "measurement": "counter",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "cdti",
+        "bucket": "test",
+        "x": 260,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f40b68efcafaea0f",
+        "type": "mqtt-broker",
+        "name": "localhost",
+        "broker": "mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "1c54d35924890682",
+        "type": "influxdb",
+        "hostname": "influxdb",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "cdti influxdb",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://influxdb:8086",
+        "rejectUnauthorized": false
+    }
+]
